@@ -9,7 +9,7 @@ import seaborn as sns
 import csv
 
 class XBAR_ARRAY:
-    def __init__(self,Row, Col, Device_R, V_WL, R_S_WL):
+    def __init__(self,Row =None, Col =None, Device_R =None, V_WL =None, R_S_WL =None):
         self.Row = Row
         self.Col = Col
         self.Device_R = Device_R
@@ -17,11 +17,12 @@ class XBAR_ARRAY:
         self.R_S_WL = R_S_WL
 
     def Output_current(self):
+        print("Start Calculation ... ")
         m = self.Row
         n = self.Col
-        R_d = self.Device_R
-        V_APP_WL1 = self.V_WL
-        R_S_WL1 = self.R_S_WL
+        R_d =self.Device_R
+        V_APP_WL1 =self.V_WL * np.ones(m)
+        R_S_WL1 =self.R_S_WL
 
         mn = m*n
         R_WL = R_S_WL1
@@ -209,12 +210,12 @@ class XBAR_ARRAY:
                 for j in range(np.shape(Vdevices)[1]):
                     if Vdevices[i][j] < 0:
                         V_where[i][j] = 0
-                        R_d[i][j] = 1e+16
+                        R_d[i][j] = 1e+16 # reverse resistance (Charge Trap Memristor)
                         R_where[i][j] = 0
             i += 1
 
         Iout = (V_BL_NODE_array.reshape((m, n))[m - 1] / R_BL)
-
+        print("Calculation Done !")
         return Iout
 
 
