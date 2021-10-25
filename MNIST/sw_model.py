@@ -28,13 +28,13 @@ import tensorflow as tf
 import csv
 
 # data_file = pd.read_csv('./data/train_resized14x14_v2.csv', delimiter=',')
-data_file = pd.read_csv('./data/1010_v2.csv', delimiter=',')
+data_file = pd.read_csv('data/train_and_test_data/1010_v2.csv', delimiter=',')
 print(type(data_file))
 print(data_file.shape)
 data_file = np.array(data_file)
 print(data_file.shape)
 
-test_data_file = pd.read_csv('./data/1010t_v2.csv', delimiter=',')
+test_data_file = pd.read_csv('data/train_and_test_data/1010t_v2.csv', delimiter=',')
 print(type(test_data_file))
 print(test_data_file.shape)
 test_data_file = np.array(test_data_file)
@@ -304,7 +304,7 @@ m = np.shape(W1)[0]
 n = np.shape(W1)[1]
 '''
 import csv
-w = open(r'C:/Users/anjangho/Desktop/MNIST1/weight/'+'28x28weight.csv','w')
+w = open(r'path/'+'10x10weight.csv','w')
 for i in range(m):
     for j in range(n):
         weight = '%f'%(W1[i][j])
@@ -313,7 +313,7 @@ for i in range(m):
 w.close()
 
 import csv
-b = open(r'C:/Users/anjangho/Desktop/MNIST1/weight/'+'28x28bias.csv','w')
+b = open(r'path/'+'10x10bias.csv','w')
 for j in range(n):
     bias = '%f'%(b1[j])
     b.write(bias + "  ")
