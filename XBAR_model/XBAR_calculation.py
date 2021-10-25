@@ -216,6 +216,7 @@ class XBAR_ARRAY:
 
         Iout = (V_BL_NODE_array.reshape((m, n))[m - 1] / R_BL)
         print("Calculation Done !")
+
         return Iout
 
 
