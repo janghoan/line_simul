@@ -1,4 +1,4 @@
-from XBAR_calculation import XBAR_ARRAY
+from XBAR_model.XBAR_calculation import XBAR_ARRAY
 import numpy as np
 import matplotlib.pyplot as plt
 # model 1: 128 x 64 Crossbar array

@@ -20,7 +20,7 @@ import pandas as pd
 import tensorflow as tf
 
 
-# MNIST data 파일 가져오기 22x22로 resizing 되어있으며, 0번째 열은 label로 저장됨.
+# MNIST_SW data 파일 가져오기 22x22로 resizing 되어있으며, 0번째 열은 label로 저장됨.
 # readlines() 메서드는 파일의 내용을 한줄씩 불러와서 문자열 리스트로 반환하는 함수
 # 그림을 제대로 보기 위해서는 좌우반전 후 90회전을 해야 함.
 
@@ -57,7 +57,7 @@ print(t_train)
 
 
 
-# common/layers.py
+# mnist_utils/layers.py
 
 
 
@@ -67,8 +67,8 @@ print(t_train)
 sys.path.append(os.pardir)  # 부모 디렉터리의 파일을 가져올 수 있도록 설정
 
 from collections import OrderedDict
-from common.layers import *
-from common.gradient import numerical_gradient
+from mnist_utils.layers import *
+from mnist_utils.gradient import numerical_gradient
 
 
 class LayerNet:
