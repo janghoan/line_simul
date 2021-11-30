@@ -14,3 +14,23 @@ def weight_mapping(weight_mat, G_mat):
     G_mapped = slope * weight_mat + y_intercept
 
     return G_mapped
+
+def weight_G_step_mapping(G_mapped, G_fit, n_states, G_min, G_max):
+    G_step = (G_max - G_min) / n_states
+    Rows , Cols = G_mapped.shape
+    for row in range(Rows):
+        for col in range(Cols):
+            for state in range(n_states):
+                if G_min + state * G_step <= G_mapped[row][col] < G_min + (state+1)*G_step:
+                    G_mapped[row][col] = G_fit[state]
+                    break
+                # Maximum Conductance condition
+                elif G_min + (n_states) * G_step <= G_mapped[row][col]:
+                    G_mapped[row][col] = G_fit[n_states-1]
+                    break
+                # Minimum Conductance condition
+                elif G_min + state * G_step > G_mapped[row][col]:
+                    G_mapped[row][col] = G_min
+                    break
+
+    return G_mapped
