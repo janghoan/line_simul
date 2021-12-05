@@ -6,15 +6,43 @@ import random
 import pandas as pd
 from pandas import DataFrame
 import seaborn as sns
+from Memristor_model.Charge_Trap_Memristor import conduct_self_rect
 import csv
 
 class XBAR_ARRAY:
-    def __init__(self,Row =None, Col =None, Device_R =None, V_WL =None, R_S_WL =None):
-        self.Row = Row
-        self.Col = Col
+    def __init__(self, Device_R =None, V_WL =None, R_S_WL =None):
+        # self.Row = Row
+        # self.Col = Col
+        self.Row, self.Col = Device_R.shape
         self.Device_R = Device_R
         self.V_WL = V_WL
         self.R_S_WL = R_S_WL
+        self.R_max = None
+        self.R_min = None
+
+    def programming(self, V_APP_WL, G_index, G_bias_index ):
+        V_device = np.zeros((self.Row, self.Col))
+        for row in range(self.Row):
+            for col in range(self.Col):
+                # get n_pulse
+                if row != self.Row - 1:
+                    n_pulse = int(G_index[row][col])
+                else:  # last low
+                    n_pulse = int(G_bias_index[row])
+
+                for pulse in (0, n_pulse + 1):
+                    V_device[row][col] = V_APP_WL * self.Device_R[row][col] / ((self.Row-row-col)*self.V_WL+self.Device_R[row][col])
+
+                    if V_device[row][col] < -5:
+                        self.Device_R[row][col] = self.Device_R[row][col] * 10 ** 4
+                    else:
+                        if pulse == 0:
+                            self.Device_R[row][col] = self.Device_R[row][col]
+                        elif pulse > 0:
+                            self.Device_R[row][col] = 1 / (1/self.Device_R[row][col] + conduct_self_rect(V = V_device[row][col], G_cell =  1/self.Device_R[row][col], G_max = 1/self.R_min, G_min = 1/self.R_max ))
+
+
+
 
     def Output_current(self):
         print("Start Calculation ... ")

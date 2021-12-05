@@ -17,10 +17,6 @@ class CTM():
         self.G_max_device = 1 / self.R_min_device
         self.G_min_device = 1 / self.R_max_device
 
-
-
-
-
 # voltage dependent term
 def ap(V):
     aa=8.3326*(1e-6)*V**(5.68494)

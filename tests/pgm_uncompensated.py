@@ -53,6 +53,27 @@ G_mapped_weight = weight_G_step_mapping(G_mapped = G_mapped_weight, G_fit = G_fi
 # Mapping bias with G_step
 G_mapped_bias = weight_G_step_mapping(G_mapped = G_mapped_bias, G_fit = G_fit, n_states = n_states, G_min = G_min, G_max = G_max)
 
+#### 6. Get G Index for Programming ####
+# weight
+G_index = get_G_index(G_mapped=G_mapped_weight, G_fit = G_fit)
+# bias
+G_bias_index = get_G_index(G_mapped=G_mapped_bias, G_fit = G_fit)
+
+#### 7. Voltages and Line Resistance ####
+'''
+    WL1 = Left Side of the Word line
+    WL2 = Right Side of the Word line
+    BL1 = Top of the Bit line
+    BL2 = Bottom of the Bit line
+'''
+V_APP_WL1 = 10 # WL input voltage
+V_APP_BL2 = 0
+
+# initial Resistance
+R_device = (1/G_min) * np.ones((weight_mat.shape))
+
+#### 8. Programming with pulse number ####
+
 
 
 

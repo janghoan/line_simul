@@ -34,3 +34,14 @@ def weight_G_step_mapping(G_mapped, G_fit, n_states, G_min, G_max):
                     break
 
     return G_mapped
+
+def get_G_index(G_mapped,G_fit):
+    Rows, Cols = G_mapped.shape
+    G_index = []
+    for row in range(Rows):
+        for col in range(Cols):
+            G_index.append((np.where(G_mapped[row][col] == G_fit))[0][0])
+    G_index = np.array(G_index).reshape((Rows, Cols))
+    return G_index
+
+
