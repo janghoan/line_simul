@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from Memristor_model.Charge_Trap_Memristor import *
-from common.utils import load_data_csv
+from common.hw_utils import load_data_csv
 
 ## 1. load device data ##
 CTM  = load_data_csv('../Memristor_model/data/CTM_device/TiNbOx_CTM_potentiation.csv')

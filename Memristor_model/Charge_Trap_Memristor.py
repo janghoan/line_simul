@@ -1,5 +1,5 @@
 import numpy as np
-from common.utils import load_data_csv
+from common.hw_utils import load_data_csv
 
 class CTM():
     def __init__(self):
